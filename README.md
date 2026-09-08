@@ -1,27 +1,111 @@
-# GitHub Trending
+# github-trending
 
-A small command-line tool for finding recently created, popular GitHub repositories.
+A command-line tool that finds recently created, popular GitHub repositories
+using the public GitHub REST API — no authentication required.
 
-## Install
+> **Note:** GitHub doesn't expose a public API for its website's "Trending"
+> page. This tool approximates it by searching for repositories **created**
+> within a chosen time window, sorted by star count — the same technique
+> used by most open-source "trending" CLIs.
 
-```text
-python -m pip install -r requirements.txt
-python -m pip install -e .
+## Features
+
+- Search repositories created within the last N days
+- Optional filter by programming language
+- Control how many results are shown
+- Clickable repository links in supporting terminals
+- Clear error handling for network issues, rate limits, and invalid input
+
+## Installation
+
+### Requirements
+- Python 3.9+
+- pip
+
+### Setup
+
+```bash
+git clone https://github.com/<your-username>/trending-repos.git
+cd trending-repos
+
+python -m venv .venv
+# Windows
+.venv\Scripts\Activate.ps1
+# macOS/Linux
+source .venv/bin/activate
+
+pip install -e .
 ```
 
 ## Usage
 
-```text
-github-trending
-github-trending --days 30 --language Python --limit 20
+```bash
+python -m github_trending.cli [--days DAYS] [--language LANGUAGE] [--limit LIMIT]
 ```
 
-The tool uses GitHub's public repository search API. Unauthenticated requests are subject to GitHub's rate limits.
+### Options
 
-Repository names are emitted as clickable ANSI OSC 8 hyperlinks in terminals that support OSC 8.
+| Flag           | Description                                    | Default |
+|----------------|-------------------------------------------------|---------|
+| `--days`       | Number of days back to search                   | `7`     |
+| `--language`   | Filter results by programming language           | none    |
+| `--limit`      | Maximum number of repositories to display        | `10`    |
+| `-h, --help`   | Show help message                                |         |
 
-## Tests
+### Examples
 
-```text
-pytest
+```bash
+# Default: repos created in the last 7 days, top 10 results
+python -m github_trending.cli
+
+# Repos created in the last 30 days, top 20 results
+python -m github_trending.cli --days 30 --limit 20
+
+# Filter by language
+python -m github_trending.cli --days 30 --limit 20 --language Python
 ```
+
+### Sample output
+
+```
+ 1. octocat/hello-world (4,870 stars)
+    A test repository showcasing GitHub features.
+ 2. octocat/another-repo (2,475 stars)
+    Reference blueprint for building agents.
+```
+
+Repository names render as clickable links in terminals that support ANSI
+hyperlinks (Windows Terminal, VS Code, iTerm2, most Linux terminals).
+
+## Rate limits
+
+This tool makes unauthenticated requests to the GitHub Search API, which is
+capped at **10 requests per minute**. If you hit the limit, wait a minute
+and try again.
+
+## Project structure
+
+```
+trending-repos/
+├── github_trending/
+│   ├── __init__.py
+│   ├── cli.py          # argparse entrypoint
+│   ├── api.py          # GitHub API client + error handling
+│   ├── formatter.py    # output formatting
+│   └── utils.py        # query-building helpers
+├── tests/
+├── requirements.txt
+├── setup.py
+└── README.md
+```
+
+## Running tests
+
+```bash
+pip install pytest
+pytest tests/
+```
+
+## License
+
+MIT
