@@ -3,6 +3,7 @@
 import argparse
 
 from .api import GitHubAPIError, search_repositories
+from .config import load_defaults
 from .formatter import format_repositories
 from .utils import github_query
 
@@ -11,9 +12,16 @@ def build_parser() -> argparse.ArgumentParser:
     # Keeping argument definitions in one parser makes the command self-documenting:
     # argparse automatically provides --help and validates typed values for us.
     parser = argparse.ArgumentParser(description="Find recently created popular GitHub repositories.")
-    parser.add_argument("--days", type=int, default=7, help="Number of days to search (default: 7).")
-    parser.add_argument("--language", help="Filter results by programming language.")
-    parser.add_argument("--limit", type=int, default=10, help="Maximum repositories to show (default: 10).")
+    defaults = load_defaults()
+    parser.add_argument(
+        "--days", type=int, default=defaults.get("days", 7), help="Number of days to search (default: %(default)s)."
+    )
+    parser.add_argument(
+        "--language", default=defaults.get("language"), help="Filter results by programming language (default: %(default)s)."
+    )
+    parser.add_argument(
+        "--limit", type=int, default=defaults.get("limit", 10), help="Maximum repositories to show (default: %(default)s)."
+    )
     return parser
 
 

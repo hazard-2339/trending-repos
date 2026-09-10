@@ -1,4 +1,4 @@
-# github-trending
+c# github-trending
 
 A command-line tool that finds recently created, popular GitHub repositories
 using the public GitHub REST API — no authentication required.
