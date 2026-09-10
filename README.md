@@ -16,6 +16,17 @@ github-trending
 github-trending --days 30 --language Python --limit 20
 ```
 
+Save defaults in `~/.trending-reposrc` to avoid repeating common options:
+
+```ini
+[defaults]
+days = 30
+language = Python
+limit = 20
+```
+
+Command-line options override values saved in the config file.
+
 The tool uses GitHub's public repository search API. Unauthenticated requests are subject to GitHub's rate limits.
 
 Repository names are emitted as clickable ANSI OSC 8 hyperlinks in terminals that support OSC 8.
