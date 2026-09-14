@@ -1,4 +1,4 @@
-c# github-trending
+# github-trending
 
 A command-line tool that finds recently created, popular GitHub repositories
 using the public GitHub REST API — no authentication required.
@@ -43,7 +43,6 @@ pip install -e .
 python -m github_trending.cli [--days DAYS] [--language LANGUAGE] [--limit LIMIT]
 ```
 
-<<<<<<< HEAD
 Save defaults in `~/.trending-reposrc` to avoid repeating common options:
 
 ```ini
@@ -56,9 +55,6 @@ limit = 20
 Command-line options override values saved in the config file.
 
 The tool uses GitHub's public repository search API. Unauthenticated requests are subject to GitHub's rate limits.
-=======
-### Options
->>>>>>> bbe11e67fba8230346f6c5e9cd15cfbba3c64135
 
 | Flag           | Description                                    | Default |
 |----------------|-------------------------------------------------|---------|
