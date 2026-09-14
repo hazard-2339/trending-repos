@@ -10,11 +10,11 @@ using the public GitHub REST API — no authentication required.
 
 ## Features
 
-- Search repositories created within the last N days
-- Optional filter by programming language
-- Control how many results are shown
-- Clickable repository links in supporting terminals
-- Clear error handling for network issues, rate limits, and invalid input
+- Search repositories created within the last N days.
+- Optional filter by programming language.
+- Control how many results are shown typee shii.
+- Clickable repository links in supporting terminals.
+- Clear error handling for network issues, rate limits, and invalid input.
 
 ## Installation
 
