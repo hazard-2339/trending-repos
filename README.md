@@ -1,3 +1,4 @@
+<img width="4032" height="2268" alt="PXL_20260908_102801142" src="https://github.com/user-attachments/assets/a7a207ea-bc26-40d0-8298-843c9fef20ac" />
 # github-trending
 
 A command-line tool that finds recently created, popular GitHub repositories
